@@ -1,5 +1,18 @@
 # sales-performance-and-customer-insights-dashboard-
-Project Title
+
+dataset/
+  └── sales_data.csv
+
+excel_analysis/
+  └── Sales_Cleaning.xlsx
+
+sql_analysis/
+  └── sales_queries.sql
+
+screenshots/
+  ├── monthly_sales.png
+  ├── top_products.png
+  └── region_sales.pngProject Title
 
 Sales Performance & Customer Insights Dashboard
 
@@ -84,6 +97,8 @@ SELECT Region, SUM(Profit) AS Total_Profit
 FROM sales_data
 GROUP BY Region
 ORDER BY Total_Profit DESC;
+<img width="639" height="475" alt="image" src="https://github.com/user-attachments/assets/c49e654f-dac2-4140-8519-49eae2ce6434" />
+
 
 🐍 Step 3 – Python Analysis
 
@@ -132,6 +147,9 @@ Electronics category had highest profit margin
 North region had highest sales but lower profit
 
 Q2 showed strongest growth
+
+<img width="633" height="463" alt="image" src="https://github.com/user-attachments/assets/6929459e-7ae8-4867-875a-550d9186c7e9" />
+
 
 🧠 Business Recommendations
 
@@ -182,3 +200,6 @@ SQL queries
 Python analysis
 
 Interactive Power BI dashboard
+
+<img width="628" height="470" alt="image" src="https://github.com/user-attachments/assets/d86a253e-db43-4b11-9b5b-6bbad59df04c" />
+
