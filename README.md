@@ -1,261 +1,186 @@
-Sales/Customer/Product Analysis
+# Sales Customer Product Analysis
 
-In this ‘Data Analysis’ project, we’ll analyze AdventureWorks, an online retailer's raw sales data, and draw meaningful insights.
+In this **Data Analysis** project, we analyze **AdventureWorks**, an online retailer’s sales data, to extract meaningful insights across sales, customers and products.
+
 <img width="2000" height="1600" alt="image" src="https://github.com/user-attachments/assets/dd99693c-83fd-47f9-8815-28a88f2bedae" />
 
+---
 
-Features
-⚡Microsoft SQL Server / SQL / T-SQL [For building the datasource]
-⚡PowerBI Desktop [For building the PowerBI dashboard/report]
-⚡PowerQuery Editor [For data-transformation/data-modeling]
-⚡PowerBI Service [For making the report accessible on the web without PowerBI login]
-⚡Multipage fully Interactive Report [For drawing insights and analysis]
+## Features
 
-Table of Contents
-Introduction
-Objective
-Dataset
-Solution Approach
-How To Use
-License
-Credits
-Get in touch
+- Microsoft SQL Server SQL and T SQL for building the data source  
+- Power BI Desktop for creating interactive dashboards  
+- Power Query Editor for data transformation and modeling  
+- Power BI Service for web based report access  
+- Fully interactive multi page dashboards  
 
-Introduction
-AdventureWorks is an online retailer that sells Bikes and Biking related items such as bike parts, biking protective gear, articles of clothing, etc.
-Online sales transactions, inventory, financials, customer and product information are captured in real-time in a transaction database.
-At the End of the day after the closing of business, data from the transaction database is extracted, formatted, and then exported to a data warehouse database.
+---
 
-Objectives
-We have been asked by AdventureWorks to perform the in-depth data analysis for the years 2016 and 2017 and draw insight into company sales performance, customers, and products so that they can build a strategy around it to generate more revenue and higher profits. Specific business requirements/questions are…
+## Table of Contents
 
-Requirement ID	For Whom	Requirement Description
-AW-DA01-REQ-1	Head of Sales	An high-level overview of internet sales by various dimensions such as customers, products, customer-cities, quarter
-AW-DA01-REQ-2	Head of Sales	Follow/track sales performance over time against the budget/target`
-AW-DA01-REQ-3	Head of Sales	Ability to dynamically slice/dice/filter data for year, month, product-attributes
-AW-DA01-REQ-4	Sales Rep	A detailed overview of sales by customers
-AW-DA01-REQ-5	Sales Rep	A detailed overview of sales by products
-AW-DA01-REQ-6	Sales Rep	Ability to dynamically slice/dice/filter and analyze data by year, month, product-attributes, customer-attributes
-Table-1 : Requirements
+- Introduction  
+- Objectives  
+- Dataset  
+- Solution Approach  
+- Exploratory Data Analysis  
+- Data Preparation  
+- Data Modeling  
+- Report Creation  
+- How To Use  
+- License  
+- Credits  
 
-Dataset
-AdventureWorks makes data available strictly through its datawarehouse-database for any data analysis. The real-time transaction database is not directly accessible.
+---
 
-AdventureWorks Datawarehouse
-data warehouse-database schema is shown below...
+## Introduction
+
+AdventureWorks is an online retailer that sells bikes and biking related items such as parts safety equipment and clothing.
+
+Online sales transactions inventory financials customer and product data are stored in a transactional system. At the end of each day the data is extracted transformed and loaded into a data warehouse which is used for reporting and analysis.
+
+---
+
+## Objectives
+
+AdventureWorks requested detailed data analysis for the years **2016 and 2017** to understand sales performance customer behavior and product trends.
+
+### Business Requirements
+
+| Requirement ID | Stakeholder | Description |
+|----------------|------------|-------------|
+| AW-DA01-REQ-1 | Head of Sales | High level overview of internet sales by customers products cities and quarters |
+| AW-DA01-REQ-2 | Head of Sales | Track sales performance against budget over time |
+| AW-DA01-REQ-3 | Head of Sales | Filter sales by year month and product attributes |
+| AW-DA01-REQ-4 | Sales Rep | Detailed view of customer level sales |
+| AW-DA01-REQ-5 | Sales Rep | Detailed view of product level sales |
+| AW-DA01-REQ-6 | Sales Rep | Filter sales by customer and product attributes |
+
+---
+
+## Dataset
+
+AdventureWorks provides data through a data warehouse.
+
+### Data Warehouse Schema
 
 <img width="373" height="658" alt="image" src="https://github.com/user-attachments/assets/1b0cd55e-241b-4d9a-b353-b8bac61ba4e9" />
 
+---
 
-The complete datawarehouse-database in the form of Microsoft SQL Server database-backup can be downloaded from here, refer the How To Use section for more details in terms of how to restore the downloaded backup to re-create the database.
+### Budget Data
 
-Budget Data
-AdventureWorks allocates a monthly budget for sales. The company sets a monthly target against which sales performance for a given month is expected to be measured as a key KPI for success. The budget/target is decided and fixed yearly in advance. Note that the budget is decided by the company's top management once a year, and it's not a part datawarehouse-database. AdventureWorks have made the budget available in the form of an XLS file; a snapshot of the 2016/2017 budget is shown below...
+Monthly sales targets are provided separately in an Excel file.
 
 <img width="437" height="991" alt="image" src="https://github.com/user-attachments/assets/dc5f5798-1123-4339-b6d1-3289118f1e06" />
 
+---
 
+## Solution Approach
 
-Solution Approach
-Requirement ID	Solution ID	Proposed Solution
-AW-DA01-REQ-1
-AW-DA01-REQ-2
-AW-DA01-REQ-3	AW-DA01-SOL-1	An Executive Summary PowerBI dashboard/report page will be built to show a high-level overview of sales data. The report will contain visuals showing data as per requirements AW-DA01-REQ-1 & AW-DA01-REQ-2.
-As per requirements AW-DA01-REQ-3, Year, month slicers and required filters will be made accessible to the user so that they can filter/slice the dashboard data dynamically as per their wishes
-AW-DA01-REQ-4
-AW-DA01-REQ-6	AW-DA01-SOL-2	A Customer Analysis PowerBI dashboard/report page will be built to show sales data segmented by various customer attributes (e.g., top customers, sales by customer gender, sales by customer's marital status, etc.). It'll contain visuals showing data as per requirements AW-DA01-REQ-4.
-As per requirements AW-DA01-REQ-6, Year, month slicers and required filters will be made accessible to the user so that they can filter/slice the dashboard data dynamically as per their wishes
-AW-DA01-REQ-5
-AW-DA01-REQ-6	AW-DA01-SOL-3	 Product Analysis PowerBI dashboard/report page will be built to show sales data segmented by various product attributes (e.g., top customers, sales by customer gender, sales by customer's marital status, etc.). It'll contain visuals showing data as per requirements AW-DA01-REQ-5.
-As per requirements AW-DA01-REQ-6, Year, month slicers and required filters will be made accessible to users so that they can filter/slice the dashboard data dynamically as per their wishes
-Table-2 : Proposed Solution
+| Requirement | Solution |
+|-------------|----------|
+| AW-DA01-REQ-1 to 3 | Executive summary dashboard with filters |
+| AW-DA01-REQ-4 and 6 | Customer analysis dashboard |
+| AW-DA01-REQ-5 and 6 | Product analysis dashboard |
 
-Exploratory Data Analysis (EDA) and Data Preparation [SQL]
-To understand, be familiar with and check the sanity of the given data, the first step is EDA. In this project, the initial data exploration has been carried out using SQL. Here, in general, we are...
+---
 
-EDA
-Here we explore the datawarehouse-database to identify the dimension and fact tables we'd need as our data source. We further explore the identified tables to understand their structure and their data. Based on the requirements, we identified the tables below as our primary data source...
+## Exploratory Data Analysis
 
-Table	Description
-DimDate	A dimension table containing date-related info
-DimCustomer	A dimension table containing customer-related info
-DimGeography	A dimension table containing customer-geography-related info
-DimProduct	A dimension table containing product-related info
-DimProductCategory	A dimension table containing product-category-related info
-DimProductSubcategory	A dimension table containing product-subcategory-related info
-FactInternetSales	A fact table containing sales-related information
-Table-3 : Database Tables
+The following tables were identified as the primary data sources.
 
-Data Preparation
-We are going to import data directly from the database into PowerBI. For this, we could directly execute the SELECT statement joining all the relevant tables from PowerBI. However, to make it cleaner, we'll create database VIEWS that'd encapsulate the required SQL, and finally, we need to execute a simple SELECT * from <view> statement from PowerBI. This approach has the following advantages...
+| Table | Description |
+|------|-------------|
+| DimDate | Date attributes |
+| DimCustomer | Customer information |
+| DimGeography | Customer location |
+| DimProduct | Product details |
+| DimProductCategory | Product category |
+| DimProductSubcategory | Product sub category |
+| FactInternetSales | Sales transactions |
 
-Makes PowerBI side of data import simpler
-We do not need to build, manage and schedule any extract (CSV or XLS files) to pull the latest data from the database and provide it to the PowerBI report since we are directly removing data from the database whenever the PowerBI report is refreshed it'll get the latest data.
-We are decoupling the data selection logic from PowerBI. If the selection logic changes, we need to modify the underlying database view; no changes are required in PowerBI as long as the selected columns remain the same.
-1. View: vw_date
--- Dimension: Date - All date-related attributes are encapsulated by this view
-DROP
-	VIEW IF EXISTS vw_date
-GO
+---
 
-CREATE 
-	VIEW vw_date AS
-SELECT
-	[DateKey],
-	[FullDateAlternateKey] AS [Date],
-	[DayNumberOfWeek],
-	[EnglishDayNameOfWeek] AS [Day],
-	[DayNumberOfMonth] AS [Day Nr],
-	[EnglishMonthName] AS [Month],
-	[MonthNumberOfYear] AS [Month Nr],
-	[CalendarQuarter] AS [Quarter],
-	[CalendarYear] AS [Year]
-FROM
-	[AdventureWorksDW2019].[dbo].[DimDate]
-GO
+## Data Preparation
 
-2. View: vw_customer
--- Dimension: Customer - All customer-related attributes are encapsulated by this view
-DROP 
-	VIEW IF EXISTS vw_customer 
-GO 
+SQL Views were created to simplify Power BI data extraction.
 
-CREATE 
-	VIEW vw_customer AS 
-SELECT 
-	[CustomerKey], 
-	CONCAT([FirstName], ', '[LastName]) AS [Full Name], 
-	CASE [MaritalStatus] WHEN 'M' THEN 'Married' WHEN 'S' THEN 'Single' END AS [Marital status], 
-	CASE [Gender] WHEN 'M' THEN 'Male' ELSE 'Female' END AS [Gender], 
-	[YearlyIncome], 
-	[TotalChildren], 
-	[EnglishEducation], 
-	[EnglishOccupation], 
-	[HouseOwnerFlag], 
-	[NumberCarsOwned], 
-	[DateFirstPurchase], 
-	GEOG.City AS [City], 
-	GEOG.EnglishCountryRegionName AS [Country] 
-FROM 
-	[AdventureWorksDW2019].[dbo].[DimCustomer] AS CUST 
-	LEFT JOIN [AdventureWorksDW2019].[dbo].[DimGeography] AS GEOG ON GEOG.GeographyKey = CUST.GeographyKey 
-GO 
-3. View: vw_product
--- Dimension: Product - All product-related attributes are encapsulated by this view 
-DROP 
-	VIEW IF EXISTS vw_product 
-GO
- 
-CREATE 
-	VIEW vw_product AS 
-SELECT 
-	[ProductKey], 
-	CATG.EnglishProductCategoryName AS [Category], 
-	SUBC.EnglishProductSubcategoryName AS [Sub Category], 
-	[EnglishProductName], 
-	[Color], 
-	[ListPrice], 
-	[ProductLine], 
-	[Class], 
-	[Style], 
-	[ModelName], 
-	[EnglishDescription], 
-	[StartDate], 
-	[EndDate], 
-	[Status] 
-FROM 
-	[AdventureWorksDW2019].[dbo].[DimProduct] AS PROD 
-	LEFT JOIN [AdventureWorksDW2019].[dbo].DimProductSubcategory AS SUBC ON SUBC.ProductSubcategoryKey = PROD.ProductSubcategoryKey 
-	LEFT JOIN [AdventureWorksDW2019].[dbo].DimProductCategory AS CATG ON CATG.ProductCategoryKey = SUBC.ProductCategoryKey 
-WHERE 
-	PROD.FinishedGoodsFlag = 1 
-GO  
-4. View: vw_internet_sales
--- Fact: FactInternetSales - All internet sales details for the years 2016 & 2017 are encapsulated by this view
-DROP 
-	VIEW IF EXISTS vw_internet_sales 
-GO 
+- vw_date  
+- vw_customer  
+- vw_product  
+- vw_internet_sales  
 
-CREATE 
-	VIEW vw_internet_sales AS 
-SELECT 
-	[ProductKey], 
-	[OrderDateKey], 
-	[DueDateKey], 
-	[ShipDateKey], 
-	[CustomerKey], 
-	[SalesOrderNumber], 
-	[SalesAmount] 
-FROM 
-	[AdventureWorksDW2019].[dbo].[FactInternetSales]
-WHERE 
-	LEFT([OrderDateKey], 4) IN (2017, 2016)
-GO
-The SQL used for creating the required views is in this repo's sales-analysis.sql file.
+This allows Power BI to pull clean and structured data directly from SQL Server.
 
-NOTE:
+---
 
-Above approach of creating views for complex queries is elegant. Still, it's feasible only if the person/team building the report has permission and the required database privileges to create SQL views. If the organization does not permit SQL view creation, the next best approach would be moving the SELECT queries for each view to PowerBI.
-It's also possible that the organization may not allow BI tools to connect with their dataware-house directly; in this situation, a data pipeline needs to be built for periodically (at least daily once) extracting required data in CSV/XLS/TXT format and placing the data-files at a location configured for PowerBI to pickup.
+## Data Cleaning and Transformation
 
-Data Cleaning and Transform [PowerQuery Editor]
-We import the vw_customer, vw_product, vw_date and vw_internet_sales as Dim_Customer, Dim_Product, Dim_Date and Fact_Internet_Sales query from SQL Server database (one example is shown below)...
+Data was imported into Power BI from SQL views and Excel budget file.
 
 <img width="695" height="487" alt="image" src="https://github.com/user-attachments/assets/54e9db80-3bc4-4b25-8b0f-71146fdc7cbb" />
 
+Steps performed:
+- Standardized column names  
+- Fixed data types  
+- Validated relationships  
 
+---
 
-We import the budget data from provided XLS file as a Fact_Budget query.
-The imported data is relatively clean and well organized; hence only a little work was required in this step; the following steps were carried out...
+## Data Model
 
-Correct column heading provided
-Correct data type is assigned to columns
-Data Model Creation [PowerBI Desktop]
-the data model is based on the four SQL views (three dimensions and one fact) we imported from the database and the budget table we imported from the XLS file. Imported views and budget tables are not implicitly related; hence, PowerBI cannot correctly establish the relationship between them; this needs to be done manually in the PowerBI Desktop data model. Once done, they are linked together by logical relationship to form a star schema. The resultant data model is shown below...
+A star schema was created in Power BI.
 
 <img width="1085" height="778" alt="image" src="https://github.com/user-attachments/assets/a4673287-b152-4c75-9d28-a29c7f07323b" />
 
+---
 
-NOTE: The prefix DIM denotes the dimension table, and FACT is the fact table.
+## Report Creation
 
-Report Creation [PowerBI Desktop]
-Three interactive reports/dashboard (report pages) will be created to implement the proposed solution. Refer to Table-2: Proposed Solution for detailed requirements and corresponding proposed solution.
+### 1 Executive Summary
 
-1. Executive Summary Report [AW-DA01-SOL-1]
-This high-level report shows the overall sales figures, top customers, top products, and Sales Vs. Budget KPI at a glance.
 <img width="1415" height="800" alt="image" src="https://github.com/user-attachments/assets/160485ea-01ea-4f90-86b1-1feb2c41961b" />
 
+---
 
+### 2 Customer Analysis
 
-2. Customer Analysis Report [AW-DA01-SOL-2]
-This more granular detailed report analyses the sales data from the company's customers' perspective.
-https://github.com/sssingh/sales-customer-product-analysis-powerbi/raw/main/images/cust-analysis-page.png?raw=true
 <img width="1403" height="788" alt="image" src="https://github.com/user-attachments/assets/bc92d9b0-57bf-4a9e-ad72-188150bc14db" />
 
+---
 
-3. Product Analysis Report [AW-DA01-SOL-3]
-This detailed report analyses the sales data from the company's products perspective.
+### 3 Product Analysis
+
 <img width="1403" height="788" alt="image" src="https://github.com/user-attachments/assets/2ee35742-70e3-4f1e-8217-d355f1708c43" />
 
+---
 
-How To Use
-Read-only access via the web (Recommended)
+## How To Use
+
+### Web Version
+
 <img width="154" height="28" alt="image" src="https://github.com/user-attachments/assets/8d1b7385-ef4a-49f9-8b18-8f8800a59028" />
 
-Explore the fully functional report with native PowerBI interactive experience.
+Use Power BI Service for interactive dashboards.
 
-Full access via PowerBI desktop
-If you have PowerBI desktop installed, download the sales-analysis.pbix from the repo and open it using PowerBI desktop. There is no need to download the raw dataset; the pbix files contain the complete normalized data model. Feel free to explore and modify.
+### Desktop Version
 
-If you wish to re-create the complete AdventureWorks datawarehouse-database (AdventureWorksDW2019) and make changes to source data in the PowerBI dashboard, follow the below steps...
+Download the PBIX file and open in Power BI Desktop.
 
-Download and Install free Microsoft SQL Server Express and Microsoft SQL Server Studio
-Download the AdventureWorksDW2019 database backup using the link provided in Dataset section
-Unzip the downloaded file (AdventureWorksDW2019.zip) and restore the backup (AdventureWorksDW2019.bak file), just follow the instructions listed here
-Once the database is restored, you should see the 4 SQL views under the "views" folder in SQL Server Management Studio. The sales-analysis.sql file provided under this repo contains the source code for the views. You can open the .sql file in SQL Server Studio and run it. It drops and re-creates the idea; hence .sql script can be modified and run multiple times without any issues.
-Now you can open the sales-analysis.pbix and click refresh; it'll ask for your SQL server credentials. Once connected, reports will fetch live data directly from SQL Server in real-time. Enjoy!
-License
+To rebuild the database:
+1. Install SQL Server and SSMS  
+2. Restore AdventureWorksDW2019  
+3. Run sales-analysis.sql  
+4. Refresh the Power BI file  
+
+---
+
+## License
+
 MIT License
 
-Credits
-AdventureWorks dataset sourced from Microsoft AdventureWorks sample databases
+---
+
+## Credits
+
+AdventureWorks dataset by Microsoft
