@@ -1,6 +1,7 @@
 Sales/Customer/Product Analysis
-In this ‘Data Analysis’ project, we’ll analyze AdventureWorks, an online retailer's raw sales data, and draw meaningful insights.
 
+In this ‘Data Analysis’ project, we’ll analyze AdventureWorks, an online retailer's raw sales data, and draw meaningful insights.
+<img width="2000" height="1600" alt="image" src="https://github.com/user-attachments/assets/dd99693c-83fd-47f9-8815-28a88f2bedae" />
 
 
 Features
@@ -19,10 +20,12 @@ How To Use
 License
 Credits
 Get in touch
+
 Introduction
 AdventureWorks is an online retailer that sells Bikes and Biking related items such as bike parts, biking protective gear, articles of clothing, etc.
 Online sales transactions, inventory, financials, customer and product information are captured in real-time in a transaction database.
 At the End of the day after the closing of business, data from the transaction database is extracted, formatted, and then exported to a data warehouse database.
+
 Objectives
 We have been asked by AdventureWorks to perform the in-depth data analysis for the years 2016 and 2017 and draw insight into company sales performance, customers, and products so that they can build a strategy around it to generate more revenue and higher profits. Specific business requirements/questions are…
 
@@ -41,11 +44,16 @@ AdventureWorks makes data available strictly through its datawarehouse-database 
 AdventureWorks Datawarehouse
 data warehouse-database schema is shown below...
 
+<img width="373" height="658" alt="image" src="https://github.com/user-attachments/assets/1b0cd55e-241b-4d9a-b353-b8bac61ba4e9" />
+
 
 The complete datawarehouse-database in the form of Microsoft SQL Server database-backup can be downloaded from here, refer the How To Use section for more details in terms of how to restore the downloaded backup to re-create the database.
 
 Budget Data
 AdventureWorks allocates a monthly budget for sales. The company sets a monthly target against which sales performance for a given month is expected to be measured as a key KPI for success. The budget/target is decided and fixed yearly in advance. Note that the budget is decided by the company's top management once a year, and it's not a part datawarehouse-database. AdventureWorks have made the budget available in the form of an XLS file; a snapshot of the 2016/2017 budget is shown below...
+
+<img width="437" height="991" alt="image" src="https://github.com/user-attachments/assets/dc5f5798-1123-4339-b6d1-3289118f1e06" />
+
 
 
 Solution Approach
@@ -105,6 +113,7 @@ SELECT
 FROM
 	[AdventureWorksDW2019].[dbo].[DimDate]
 GO
+
 2. View: vw_customer
 -- Dimension: Customer - All customer-related attributes are encapsulated by this view
 DROP 
@@ -188,8 +197,12 @@ NOTE:
 
 Above approach of creating views for complex queries is elegant. Still, it's feasible only if the person/team building the report has permission and the required database privileges to create SQL views. If the organization does not permit SQL view creation, the next best approach would be moving the SELECT queries for each view to PowerBI.
 It's also possible that the organization may not allow BI tools to connect with their dataware-house directly; in this situation, a data pipeline needs to be built for periodically (at least daily once) extracting required data in CSV/XLS/TXT format and placing the data-files at a location configured for PowerBI to pickup.
+
 Data Cleaning and Transform [PowerQuery Editor]
 We import the vw_customer, vw_product, vw_date and vw_internet_sales as Dim_Customer, Dim_Product, Dim_Date and Fact_Internet_Sales query from SQL Server database (one example is shown below)...
+
+<img width="695" height="487" alt="image" src="https://github.com/user-attachments/assets/54e9db80-3bc4-4b25-8b0f-71146fdc7cbb" />
+
 
 
 We import the budget data from provided XLS file as a Fact_Budget query.
@@ -200,6 +213,7 @@ Correct data type is assigned to columns
 Data Model Creation [PowerBI Desktop]
 the data model is based on the four SQL views (three dimensions and one fact) we imported from the database and the budget table we imported from the XLS file. Imported views and budget tables are not implicitly related; hence, PowerBI cannot correctly establish the relationship between them; this needs to be done manually in the PowerBI Desktop data model. Once done, they are linked together by logical relationship to form a star schema. The resultant data model is shown below...
 
+<img width="1085" height="778" alt="image" src="https://github.com/user-attachments/assets/a4673287-b152-4c75-9d28-a29c7f07323b" />
 
 
 NOTE: The prefix DIM denotes the dimension table, and FACT is the fact table.
@@ -209,22 +223,25 @@ Three interactive reports/dashboard (report pages) will be created to implement 
 
 1. Executive Summary Report [AW-DA01-SOL-1]
 This high-level report shows the overall sales figures, top customers, top products, and Sales Vs. Budget KPI at a glance.
+<img width="1415" height="800" alt="image" src="https://github.com/user-attachments/assets/160485ea-01ea-4f90-86b1-1feb2c41961b" />
 
 
 
 2. Customer Analysis Report [AW-DA01-SOL-2]
 This more granular detailed report analyses the sales data from the company's customers' perspective.
-
+https://github.com/sssingh/sales-customer-product-analysis-powerbi/raw/main/images/cust-analysis-page.png?raw=true
+<img width="1403" height="788" alt="image" src="https://github.com/user-attachments/assets/bc92d9b0-57bf-4a9e-ad72-188150bc14db" />
 
 
 3. Product Analysis Report [AW-DA01-SOL-3]
 This detailed report analyses the sales data from the company's products perspective.
-
+<img width="1403" height="788" alt="image" src="https://github.com/user-attachments/assets/2ee35742-70e3-4f1e-8217-d355f1708c43" />
 
 
 How To Use
 Read-only access via the web (Recommended)
-Open In Power Bi
+<img width="154" height="28" alt="image" src="https://github.com/user-attachments/assets/8d1b7385-ef4a-49f9-8b18-8f8800a59028" />
+
 Explore the fully functional report with native PowerBI interactive experience.
 
 Full access via PowerBI desktop
@@ -239,9 +256,6 @@ Once the database is restored, you should see the 4 SQL views under the "views" 
 Now you can open the sales-analysis.pbix and click refresh; it'll ask for your SQL server credentials. Once connected, reports will fetch live data directly from SQL Server in real-time. Enjoy!
 License
 MIT License
-
-Get in touch
-email twitter linkedin website
 
 Credits
 AdventureWorks dataset sourced from Microsoft AdventureWorks sample databases
